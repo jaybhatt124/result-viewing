@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+
+    <!-- SEARCH CARD -->
+    <div class="card portal-card mb-4 animate__animated animate__fadeInUp">
+      <h4 class="mb-3 text-primary">🔍 View Your Result</h4>
+
+      <form method="post" class="row g-3">
+
+        <!-- ENROLLMENT -->
+        <div class="col-md-4">
+          <label class="form-label">Enrollment Number</label>
+          <input
+            class="form-select form-select-lg curved-input"
+            name="enrollment"
+            placeholder="Enrollment No"
+            required
+          >
+        </div>
+
+        <!-- DEPARTMENT (NEW FEATURE ADDED) -->
+        <div class="col-md-4">
+          <label class="form-label">Department</label>
+          <select
+            class="form-select form-select-lg curved-input"
+            name="department"
+            required
+          >
+            <option value="">Select Department</option>
+            <option value="Computer Engineering">Computer Engineering</option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Electronics Engineering">Electronics Engineering</option>
+          </select>
+        </div>
+
+        <!-- SEMESTER -->
+        <div class="col-md-3">
+          <label class="form-label">Semester</label>
+          <select
+            class="form-select form-select-lg curved-input"
+            name="semester"
+            required
+          >
+            <option value="">Select Sem</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+          </select>
+        </div>
+
+        <!-- VIEW BUTTON -->
+        <div class="col-md-2 d-flex align-items-end">
+          <button class="btn view-btn w-100 btn-lg">
+            <i class="bi bi-eye-fill me-2"></i> View
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    {% if marks %}
+    <!-- RESULT CARD -->
+    <div class="card portal-card animate__animated animate__fadeInUp animate__delay-1s">
+      <h4 class="mb-3 text-success">📄 Result Sheet</h4>
+
+      <div class="row mb-3 info-row">
+        <div class="col-md-6"><b>Name:</b> {{ info.name }}</div>
+        <div class="col-md-6"><b>Enrollment:</b> {{ info.enrollment }}</div>
+        <div class="col-md-6"><b>Department:</b> {{ info.department }}</div>
+        <div class="col-md-6"><b>Exam:</b> {{ info.exam_name }}</div>
+        <div class="col-md-6"><b>Academic Year:</b> {{ info.academic_year }}</div>
+      </div>
+
+      <div class="table-responsive">
+        <table
+          class="table table-hover table-bordered text-center marks-table animate__animated animate__fadeIn"
+        >
+          <tr>
+            {% for sub in marks.keys() %}
+            <th>{{ sub }}</th>
+            {% endfor %}
+          </tr>
+          <tr>
+            {% for m in marks.values() %}
+            <td>{{ m }}</td>
+            {% endfor %}
+          </tr>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
